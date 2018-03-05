@@ -17,6 +17,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -49,17 +50,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				switch tt := message.Text; tt{
-					case "鼎一" :
-						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"鼎一得第一")).Do(); err != nil {
-							log.Print(err)
-						}
-					case "胖子" :
-						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"到底要不要吃飯")).Do(); err != nil {
-							log.Print(err)
-						}
-					default :
+				if strings.Contains(message.Text, "鼎"){
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"鼎一得第一")).Do(); err != nil {
 						log.Print(err)
+					}
 				}
 			}
 		}
