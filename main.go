@@ -54,11 +54,16 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("鼎一鼎一得第一")).Do(); err != nil {
 						log.Print(err)
 					}
-				}else if (strings.Contains(message.Text, "Ding")){
+				}else if (strings.Contains(message.Text, "@Ding1")){
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("李鼎一 出來！")).Do(); err != nil {
 						log.Print(err)
 					}
+				}else if (strings.Contains(message.Text, "Ding")){
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Ding1Ding1NumberOne")).Do(); err != nil {
+						log.Print(err)
+					}
 				}
+				
 			}
 		}
 	}
