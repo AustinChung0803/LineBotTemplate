@@ -50,9 +50,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				log.Print(message.Text)
 				if strings.Contains(message.Text, "鼎"){
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("鼎一鼎一得第一")).Do(); err != nil {
+						log.Print(err)
+					}
+				}else if (message.Text == "@Ding1"){
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("李鼎一 出來！")).Do(); err != nil {
 						log.Print(err)
 					}
 				}
