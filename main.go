@@ -55,7 +55,17 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						log.Print(err)
 					}
 				}else if (strings.Contains(message.Text, "@Ding1")){
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("李鼎一 出來！")).Do(); err != nil {
+					template := linebot.NewCarouselTemplate(
+						linebot.NewCarouselColumn(
+						imageURL, "hoge", "fuga",
+						linebot.NewURITemplateAction("Go to line.me", "https://line.me"),
+						linebot.NewPostbackTemplateAction("Say hello1", "hello こんにちは", ""),),
+						linebot.NewCarouselColumn(
+						imageURL, "hoge", "fuga",
+						linebot.NewPostbackTemplateAction("言 hello2", "hello こんにちは", "hello こんにちは"),
+						linebot.NewMessageTemplateAction("Say message", "Rice=米"),),
+					)
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTemplateMessage("Carousel alt text", template)).Do(); err != nil {
 						log.Print(err)
 					}
 				}else if (strings.Contains(message.Text, "Ding")){
